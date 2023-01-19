@@ -4,6 +4,9 @@ const express = require("express");
 const bodyParser = require("body-parser");
 const mongoose = require("mongoose");
 const _ = require("lodash");
+require('dotenv').config()
+
+const url = process.env.MONGO_URL;
 
 const app = express();
 
@@ -13,7 +16,7 @@ app.use(bodyParser.urlencoded({extended: true}));
 app.use(express.static("public"));
 
 mongoose.set('strictQuery', false);
-mongoose.connect("mongodb+srv://root:pass@cluster0.wuffgdr.mongodb.net/todolistDB",{useNewUrlParser: true})
+mongoose.connect(url,{useNewUrlParser: true})
 
 const todoSchema = new mongoose.Schema({
   name:String
